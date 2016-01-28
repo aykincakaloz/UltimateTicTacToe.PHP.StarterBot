@@ -3,10 +3,11 @@
 class Game
 {
     private $settings = [];
+    private $map;
 
     public function __construct()
     {
-
+        $this->map = new Map();
     }
 
     public function get($setting)
@@ -30,16 +31,30 @@ class Game
                 break;
             }
 
-            preg_match("/^(?<command>settings|update game|action) (?<arg>\S+) (?<parameter>.+)$/", $command, $commandParams);
+            preg_match("/^(?<command>settings|update game|action|custom) (?<arg>\S+) (?<parameter>.+)$/", $command, $commandParams);
             if (!count($commandParams)) {
                 echo "Undefined Command\n";
                 continue;
             }
 
+
+
             if ($commandParams['command'] === 'settings') {
                 if (false === $this->set($commandParams['arg'], $commandParams['parameter'])) {
                     echo "Undefined setting\n";
                     continue;
+                }
+            }
+
+            if ($commandParams['command'] === 'update game') {
+                if ($commandParams['arg'] === 'field') {
+                    $this->map->setFieldFromString($commandParams['parameter']);
+                }
+            }
+
+            if ($commandParams['command'] === 'custom') {
+                if ($commandParams['arg'] === 'print') {
+                    $this->map->printField();
                 }
             }
         }
