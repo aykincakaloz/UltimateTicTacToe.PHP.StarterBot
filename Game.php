@@ -38,7 +38,6 @@ class Game
             }
 
 
-
             if ($commandParams['command'] === 'settings') {
                 if (false === $this->set($commandParams['arg'], $commandParams['parameter'])) {
                     echo "Undefined setting\n";
@@ -53,6 +52,12 @@ class Game
 
                 if ($commandParams['arg'] === 'macroboard') {
                     $this->map->setMacroBoardFromString($commandParams['parameter']);
+                }
+            }
+
+            if ($commandParams['command'] === 'action') {
+                if ($commandParams['arg'] === 'move') {
+                    $this->makeMove();
                 }
             }
 
@@ -78,5 +83,17 @@ class Game
         $this->settings[$setting] = $value;
 
         return true;
+    }
+
+    public function makeMove()
+    {
+        $availableMoves = $this->map->getAvailableMoves();
+
+        /** Make a random move
+         * @var Move $move
+        */
+        $move = $availableMoves[rand(0,count($availableMoves)-1)];
+
+        echo "place_move ".$move->getX()." ".$move->getY()."\n";
     }
 }
