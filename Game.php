@@ -50,6 +50,10 @@ class Game
                 if ($commandParams['arg'] === 'field') {
                     $this->map->setFieldFromString($commandParams['parameter']);
                 }
+
+                if ($commandParams['arg'] === 'macroboard') {
+                    $this->map->setMacroBoardFromString($commandParams['parameter']);
+                }
             }
 
             if ($commandParams['command'] === 'custom') {
