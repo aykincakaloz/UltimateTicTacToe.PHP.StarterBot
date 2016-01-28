@@ -58,7 +58,12 @@ class Game
 
             if ($commandParams['command'] === 'custom') {
                 if ($commandParams['arg'] === 'print') {
-                    $this->map->printField();
+                    if ($commandParams['parameter'] === 'field') {
+                        $this->map->printField();
+                    }
+                    if ($commandParams['parameter'] === 'macroboard') {
+                        $this->map->printMacroBoard();
+                    }
                 }
             }
         }
