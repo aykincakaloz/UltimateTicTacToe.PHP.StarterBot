@@ -1,4 +1,4 @@
 all:
-	zip TicTacToeBotPHP.zip *.php
+	zip -r TicTacToeBotPHP.zip *.php AIGames
 clean:
 	rm -f TicTacToeBotPHP.zip *~
