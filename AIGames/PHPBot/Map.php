@@ -1,5 +1,10 @@
 <?php
+namespace AIGames\PHPBot;
 
+/**
+ * Class Map
+ * @package AIGames\PHPBot
+ */
 class Map
 {
     public $field;
@@ -29,6 +34,16 @@ class Map
     }
 
 
+    /**
+     * Set the field from input string
+     * Example:
+     * 0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,
+     * 0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,
+     * 0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+     *
+     * @param $string
+     * @return bool
+     */
     public function setFieldFromString($string) //0,0,0,0,0,2,0,0,0,0,..
     {
         $inputField = explode(",", $string);
@@ -51,7 +66,14 @@ class Map
         return true;
     }
 
-    public function setMacroBoardFromString($string) //0,-1,0,0,0,2,0,0,0,0,..
+    /**
+     * Set the MacroBoard from input string
+     * Example: 0,-1,0,0,0,2,0,0,0
+     *
+     * @param $string
+     * @return bool
+     */
+    public function setMacroBoardFromString($string)
     {
         $inputField = explode(",", $string);
         if (count($inputField) != 3 * 3) {
@@ -73,6 +95,12 @@ class Map
         return true;
     }
 
+    /**
+     * Checks all the MacroBoard(s) which are applicable for empty squares,
+     * giving an array of all possible moves for the round
+     *
+     * @return array
+     */
     public function getAvailableMoves()
     {
         $moves = [];
@@ -88,6 +116,8 @@ class Map
     }
 
     /**
+     * Checks if the given coordinates are within the active MacroBoard
+     *
      * @param int $x
      * @param int $y
      * @return bool
@@ -97,8 +127,11 @@ class Map
         return ($this->macroBoard[(int)floor($x / 3)][(int)floor($y / 3)] == -1);
     }
 
+    /**
+     * Custom printing function for debugging (NOT USED IN THE COMPETITION)
+     */
     public function printField()
-    { // custom printing function for debugging
+    {
         for ($y = 0; $y < 9; $y++) {
             for ($x = 0; $x < 9; $x++) {
                 echo($this->field[$x][$y] == 1 ? "O" : ($this->field[$x][$y] == 2 ? "X" : "_"));
@@ -107,9 +140,11 @@ class Map
         }
     }
 
-
+    /**
+     * Custom printing function for debugging (NOT USED IN THE COMPETITION)
+     */
     public function printMacroBoard()
-    { // custom printing function for debugging
+    {
         for ($y = 0; $y < 3; $y++) {
             for ($x = 0; $x < 3; $x++) {
                 echo($this->macroBoard[$x][$y] == -1 ? "_" : "X");

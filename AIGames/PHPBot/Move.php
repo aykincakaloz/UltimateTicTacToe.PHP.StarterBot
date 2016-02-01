@@ -1,5 +1,10 @@
 <?php
+namespace AIGames\PHPBot;
 
+/**
+ * Class Move
+ * @package AIGames\PHPBot
+ */
 class Move
 {
     /**
